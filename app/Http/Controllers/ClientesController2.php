@@ -11,6 +11,9 @@ class ClientesController2 extends Controller
     public function listar(Request $request) {
         $consulta = DB::table('clientes');
 
+        $anterior2000 = $request->boolean('anterior2000');
+        // TODO: implementar filtro por nascimento
+
         $filtroNome = $request->nome;
         if ($filtroNome) {
             $consulta->where('nome', 'like', "%$filtroNome%");
@@ -21,7 +24,11 @@ class ClientesController2 extends Controller
 
         logger()->info('cheguei até aqui');
         logger('achei ' . count($clientes) . ' clientes');
-        return view('clientes.lista', ['clientes' => $clientes]);
+        return view('clientes.lista', [
+            'clientes' => $clientes,
+            'nome' => $filtroNome,
+            'anterior2000' => $anterior2000,
+        ]);
     }
 
     public function inserir(Request $request) {
