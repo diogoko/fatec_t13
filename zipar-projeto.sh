@@ -1,6 +1,6 @@
 #!/bin/bash -eu
 
-NOME=$(basename $PWD)-$(date '+%Y%m%d.%H%m').zip
+NOME=$(basename $PWD)-$(date '+%Y%m%d.%H%M').zip
 
 zip -r \
     -q \
