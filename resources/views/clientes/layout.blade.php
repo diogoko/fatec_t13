@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>
-        <img src="{{ asset('imagens/cachorrinho.jpg') }}" alt="">
+        <img src="{{ asset('imagens/cachorrinho.jpg') }}" alt="" style="width: 50px;">
         Cadastro de Clientes
     </h1>
 
