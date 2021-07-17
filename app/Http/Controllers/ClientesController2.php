@@ -12,13 +12,24 @@ class ClientesController2 extends Controller
         $consulta = DB::table('clientes');
 
         $anterior2000 = $request->boolean('anterior2000');
-        // TODO: implementar filtro por nascimento
+        if ($anterior2000) {
+            //$consulta->where('nascimento', '<', '2000-01-01');
+            $consulta->whereYear('nascimento', '<', '2000');
+        }
 
         $filtroNome = $request->nome;
         if ($filtroNome) {
-            $consulta->where('nome', 'like', "%$filtroNome%");
+            $consulta->where(function ($query) use ($filtroNome) {
+                $query->orWhere('nome', 'like', "$filtroNome%");
+                $query->orWhere('nome', 'like', "%$filtroNome");
+                return $query;
+            });
         }
         $consulta->orderBy('nome');
+        //$consulta->oldest('nascimento');
+
+        //$consulta->limit(3);
+        //$consulta->offset(5);
 
         $clientes = $consulta->get();
 
@@ -40,11 +51,35 @@ class ClientesController2 extends Controller
         $nome = $request->nome;
         $nascimento = $request->nascimento;
 
-        //DB::insert("insert into aula1.clientes (nome, nascimento) values (?, ?)",
-        //    [$nome, $nascimento]);
+        $id = DB::table('clientes')->insertGetId([
+            'nome' => $nome,
+            'nascimento' => $nascimento,
+        ]);
 
-        DB::insert("insert into aula1.clientes (nome, nascimento) values (:nome, :nascimento)",
-            ['nome' => $nome, 'nascimento' => $nascimento]);
+        return redirect()->route('ClientesEditar', ['cliente' => $id]);
+    }
+
+    public function editar($id) {
+        $cliente = DB::table('clientes')->find($id);
+
+        return view('clientes.formulario', [
+            'id' => $cliente->id,
+            'nome' => $cliente->nome,
+            'nascimento' => $cliente->nascimento,
+            'editando' => true,
+        ]);
+    }
+
+    public function alterar(Request $request, $id) {
+        $request->validate([
+            'nome' => 'required|max:200',
+            'nascimento' => 'required|date',
+        ]);
+
+        $nome = $request->nome;
+        $nascimento = $request->nascimento;
+
+        DB::table('clientes')->where('id', $id)->update(compact('nome', 'nascimento'));
 
         $agora = Carbon::now();
         $nascimentoCarbon = new Carbon($nascimento);
@@ -58,5 +93,4 @@ class ClientesController2 extends Controller
             'idade' => $idade,
         ]);
     }
-
 }

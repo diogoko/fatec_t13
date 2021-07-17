@@ -44,3 +44,5 @@ $rota->name('CalculadoraSoma');
 Route::get('/clientes', [ClientesController2::class, 'listar'])->name('ClientesListar');
 Route::view('/clientes/novo', 'clientes.formulario');
 Route::post('/clientes/novo', [ClientesController2::class, 'inserir'])->name('ClientesResultado');
+Route::get('/clientes/{cliente}', [ClientesController2::class, 'editar'])->name('ClientesEditar');
+Route::post('/clientes/{cliente}', [ClientesController2::class, 'alterar'])->name('ClientesAlterar');

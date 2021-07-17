@@ -9,16 +9,20 @@
         </div>
     @endif
 
-    <form action="{{ route('ClientesResultado') }}" method="post">
+    <form action="{{
+        isset($editando) ?
+            route('ClientesAlterar', ['cliente' => $id])
+            : route('ClientesResultado')
+    }}" method="post">
         @csrf
         <div>
-            <input type="text" name="nome" value="{{ old('nome') }}">
+            <input type="text" name="nome" value="{{ old('nome') ?? $nome ?? '' }}">
             @error('nome')
                 A mensagem de erro é: {{$message}}
             @endif
         </div>
         <div>
-            <input name="nascimento" type="date" value="{{ old('nascimento') }}">
+            <input name="nascimento" type="date" value="{{ old('nascimento') ?? $nascimento ?? '' }}">
             @error('nascimento')
             A mensagem de erro é: {{$message}}
             @endif
