@@ -1,16 +1,24 @@
 @extends('clientes.layout')
 
 @section('conteudo')
-    @foreach ($clientes as $cliente)
-    <div>
-        <p>Nome</p>
-        <p>{{ $cliente->nome }}</p>
-    </div>
-    <div>
-        <p>Nascimento</p>
-        <p>{{ $cliente->nascimento }}</p>
-    </div>
-    @endforeach
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>Nascimento</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($clientes as $cliente)
+                <tr>
+                    <td>{{ $cliente->id }}</td>
+                    <td>{{ $cliente->nome }}</td>
+                    <td>{{ $cliente->nascimento }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 @endsection
 
 
