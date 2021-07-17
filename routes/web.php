@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CalculadoraController;
 use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\ClientesController2;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,6 @@ Route::post('/calculadora/resultado', [CalculadoraController::class, 'resultado'
 $rota = Route::get('/calculadora/soma/{num1}/{num2}', [CalculadoraController::class, 'soma']);
 $rota->name('CalculadoraSoma');
 
-Route::get('/clientes', [ClientesController::class, 'listar']);
+Route::get('/clientes', [ClientesController2::class, 'listar']);
 Route::view('/clientes/novo', 'clientes.formulario');
-Route::post('/clientes/novo', [ClientesController::class, 'inserir'])->name('ClientesResultado');
+Route::post('/clientes/novo', [ClientesController2::class, 'inserir'])->name('ClientesResultado');
