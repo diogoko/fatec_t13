@@ -12,6 +12,7 @@ zip -r \
     -x 'bootstrap/cache/**' \
     -x 'node_modules/*' \
     -x 'storage/app/**' \
+    -x 'storage/debugbar/**' \
     -x 'storage/framework/cache/**' \
     -x 'storage/framework/sessions/**' \
     -x 'storage/framework/testing/**' \
