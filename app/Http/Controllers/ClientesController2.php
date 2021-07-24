@@ -12,6 +12,7 @@ class ClientesController2 extends Controller
         $consulta = DB::table('clientes');
 
         $consulta->leftJoin('cidades', 'cidades.id', '=', 'cidade_id');
+        $consulta->leftJoin('paises', 'paises.id', '=', 'cidades.pais_id');
 
         $anterior2000 = $request->boolean('anterior2000');
         if ($anterior2000) {
@@ -30,15 +31,18 @@ class ClientesController2 extends Controller
         $consulta->orderBy('clientes.nome');
         //$consulta->oldest('nascimento');
 
-        $consulta->select('clientes.*', 'cidades.nome as cidade', 'cidades.estado');
+        $consulta->select(
+            'clientes.*',
+            'cidades.nome as cidade',
+            'cidades.estado',
+            'paises.nome as pais'
+        );
 
         //$consulta->limit(3);
         //$consulta->offset(5);
 
         $clientes = $consulta->get();
 
-        logger()->info('cheguei até aqui');
-        logger('achei ' . count($clientes) . ' clientes');
         return view('clientes.lista', [
             'clientes' => $clientes,
             'nome' => $filtroNome,

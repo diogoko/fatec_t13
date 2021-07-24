@@ -43,6 +43,10 @@
                         @if ($cliente->cidade)
                             {{ $cliente->cidade }} - {{ $cliente->estado }}
                         @endif
+
+                        @if ($cliente->pais)
+                            - {{ $cliente->pais }}
+                        @endif
                     </td>
                 </tr>
             @endforeach
