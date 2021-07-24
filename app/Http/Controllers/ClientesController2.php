@@ -42,21 +42,32 @@ class ClientesController2 extends Controller
         ]);
     }
 
+    public function novo() {
+        return view('clientes.formulario', [
+            'editando' => false,
+            'cidades' => DB::table('cidades')->orderBy('nome')->get(),
+            'cidade_id' => null,
+        ]);
+    }
+
     public function inserir(Request $request) {
         $request->validate([
             'nome' => 'required|max:200',
             'nascimento' => 'required|date',
+            'cidade_id' => 'required|int',
         ]);
 
         $nome = $request->nome;
         $nascimento = $request->nascimento;
+        $cidade_id = $request->cidade_id;
 
         $id = DB::table('clientes')->insertGetId([
             'nome' => $nome,
             'nascimento' => $nascimento,
+            'cidade_id' => $cidade_id,
         ]);
 
-        return redirect()->route('ClientesEditar', ['cliente' => $id]);
+        return redirect()->route('ClientesListar');
     }
 
     public function editar($id) {
@@ -67,6 +78,8 @@ class ClientesController2 extends Controller
             'nome' => $cliente->nome,
             'nascimento' => $cliente->nascimento,
             'editando' => true,
+            'cidades' => DB::table('cidades')->orderBy('nome')->get(),
+            'cidade_id' => $cliente->cidade_id,
         ]);
     }
 
@@ -74,12 +87,14 @@ class ClientesController2 extends Controller
         $request->validate([
             'nome' => 'required|max:200',
             'nascimento' => 'required|date',
+            'cidade_id' => 'required|int',
         ]);
 
         $nome = $request->nome;
         $nascimento = $request->nascimento;
+        $cidade_id = $request->cidade_id;
 
-        DB::table('clientes')->where('id', $id)->update(compact('nome', 'nascimento'));
+        DB::table('clientes')->where('id', $id)->update(compact('nome', 'nascimento', 'cidade_id'));
 
         $agora = Carbon::now();
         $nascimentoCarbon = new Carbon($nascimento);
@@ -87,10 +102,6 @@ class ClientesController2 extends Controller
         // A opção CarbonInterface::DIFF_ABSOLUTE tira o sufixo ("antes", "depois", etc.)
         $idade = $agora->diffForHumans($nascimentoCarbon, \Carbon\CarbonInterface::DIFF_ABSOLUTE);
 
-        return view('clientes.resultado', [
-            'nome' => $nome,
-            'nascimento' => $nascimento,
-            'idade' => $idade,
-        ]);
+        return redirect()->route('ClientesListar');
     }
 }

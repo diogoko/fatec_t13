@@ -10,7 +10,7 @@
     @endif
 
     <form action="{{
-        isset($editando) ?
+        $editando ?
             route('ClientesAlterar', ['cliente' => $id])
             : route('ClientesResultado')
     }}" method="post">
@@ -26,6 +26,22 @@
             @error('nascimento')
             A mensagem de erro é: {{$message}}
             @endif
+        </div>
+        <div>
+            <select name="cidade_id">
+                <option></option>
+
+                @foreach ($cidades as $cidade)
+                    <option
+                        value="{{ $cidade->id }}"
+                        @if ($cidade->id == $cidade_id)
+                            selected
+                        @endif
+                    >
+                        {{ $cidade->nome }} - {{ $cidade->estado }}
+                    </option>
+                @endforeach
+            </select>
         </div>
         <div>
             <input type="submit" value="Salvar">

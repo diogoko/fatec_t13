@@ -26,6 +26,7 @@
                 <th>Id</th>
                 <th>Nome</th>
                 <th>Nascimento</th>
+                <th>Cidade</th>
             </tr>
         </thead>
         <tbody>
@@ -38,6 +39,7 @@
                         </a>
                     </td>
                     <td>{{ $cliente->nascimento }}</td>
+                    <td>{{ $cliente->cidade_id }}</td>
                 </tr>
             @endforeach
         </tbody>
