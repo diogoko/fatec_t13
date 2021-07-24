@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CalculadoraController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\ClientesController2;
+use App\Http\Controllers\ClientesController3;
 use App\Http\Controllers\CidadesController;
 
 /*
@@ -42,11 +43,11 @@ Route::post('/calculadora/resultado', [CalculadoraController::class, 'resultado'
 $rota = Route::get('/calculadora/soma/{num1}/{num2}', [CalculadoraController::class, 'soma']);
 $rota->name('CalculadoraSoma');
 
-Route::get('/clientes', [ClientesController2::class, 'listar'])->name('ClientesListar');
-Route::get('/clientes/novo', [ClientesController2::class, 'novo'])->name('ClientesNovo');
-Route::post('/clientes/novo', [ClientesController2::class, 'inserir'])->name('ClientesResultado');
-Route::get('/clientes/{cliente}', [ClientesController2::class, 'editar'])->name('ClientesEditar');
-Route::post('/clientes/{cliente}', [ClientesController2::class, 'alterar'])->name('ClientesAlterar');
+Route::get('/clientes', [ClientesController3::class, 'listar'])->name('ClientesListar');
+Route::get('/clientes/novo', [ClientesController3::class, 'novo'])->name('ClientesNovo');
+Route::post('/clientes/novo', [ClientesController3::class, 'inserir'])->name('ClientesResultado');
+Route::get('/clientes/{cliente}', [ClientesController3::class, 'editar'])->name('ClientesEditar');
+Route::post('/clientes/{cliente}', [ClientesController3::class, 'alterar'])->name('ClientesAlterar');
 
 Route::get('/cidades', [CidadesController::class, 'listar'])->name('CidadesListar');
 Route::view('/cidades/novo', 'cidades.formulario');
