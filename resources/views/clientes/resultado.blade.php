@@ -1,4 +1,4 @@
-@extends('clientes.layout')
+@extends('layout')
 
 @section('conteudo')
     <div>

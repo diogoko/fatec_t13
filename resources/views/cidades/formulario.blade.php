@@ -1,4 +1,4 @@
-@extends('cidades.layout')
+@extends('layout')
 
 @section('conteudo')
     @if ($errors->any())
