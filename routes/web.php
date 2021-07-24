@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CalculadoraController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\ClientesController2;
+use App\Http\Controllers\CidadesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,3 +47,9 @@ Route::view('/clientes/novo', 'clientes.formulario');
 Route::post('/clientes/novo', [ClientesController2::class, 'inserir'])->name('ClientesResultado');
 Route::get('/clientes/{cliente}', [ClientesController2::class, 'editar'])->name('ClientesEditar');
 Route::post('/clientes/{cliente}', [ClientesController2::class, 'alterar'])->name('ClientesAlterar');
+
+Route::get('/cidades', [CidadesController::class, 'listar'])->name('CidadesListar');
+Route::view('/cidades/novo', 'cidades.formulario');
+Route::post('/cidades/novo', [CidadesController::class, 'inserir'])->name('CidadesResultado');
+Route::get('/cidades/{cidade}', [CidadesController::class, 'editar'])->name('CidadesEditar');
+Route::post('/cidades/{cidade}', [CidadesController::class, 'alterar'])->name('CidadesAlterar');
