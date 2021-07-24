@@ -39,7 +39,11 @@
                         </a>
                     </td>
                     <td>{{ $cliente->nascimento }}</td>
-                    <td>{{ $cliente->cidade_id }}</td>
+                    <td>
+                        @if ($cliente->cidade)
+                            {{ $cliente->cidade }} - {{ $cliente->estado }}
+                        @endif
+                    </td>
                 </tr>
             @endforeach
         </tbody>

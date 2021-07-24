@@ -11,6 +11,8 @@ class ClientesController2 extends Controller
     public function listar(Request $request) {
         $consulta = DB::table('clientes');
 
+        $consulta->leftJoin('cidades', 'cidades.id', '=', 'cidade_id');
+
         $anterior2000 = $request->boolean('anterior2000');
         if ($anterior2000) {
             //$consulta->where('nascimento', '<', '2000-01-01');
@@ -25,8 +27,10 @@ class ClientesController2 extends Controller
                 return $query;
             });
         }
-        $consulta->orderBy('nome');
+        $consulta->orderBy('clientes.nome');
         //$consulta->oldest('nascimento');
+
+        $consulta->select('clientes.*', 'cidades.nome as cidade', 'cidades.estado');
 
         //$consulta->limit(3);
         //$consulta->offset(5);
