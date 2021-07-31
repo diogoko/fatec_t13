@@ -57,9 +57,13 @@
         </tbody>
     </table>
 
+    <h3>HTML de paginação método links()</h3>
+
     <div>
         {{ $clientes->links() }}
     </div>
+
+    <h3>HTML de paginação manual</h3>
 
     <div>
         <p>Mostrando {{ $clientes->count() }} itens na página {{ $clientes->currentPage() }} de {{ $clientes->lastPage() }}</p>
