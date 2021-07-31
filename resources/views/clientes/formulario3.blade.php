@@ -22,7 +22,7 @@
             @endif
         </div>
         <div>
-            <input name="nascimento" type="date" value="{{ old('nascimento') ?? $cliente->nascimento ?? '' }}">
+            <input name="nascimento" type="date" value="{{ old('nascimento') ?? $cliente->nascimento->toDateString() ?? '' }}">
             @error('nascimento')
             A mensagem de erro é: {{$message}}
             @endif

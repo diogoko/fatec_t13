@@ -39,7 +39,7 @@
                             {{ $cliente->nome }}
                         </a>
                     </td>
-                    <td>{{ $cliente->nascimento }}</td>
+                    <td>{{ $cliente->nascimento->format('d/m/Y') }}</td>
                     <td>
                         @if ($cliente->cidade)
                             {{ $cliente->cidade->nome }} - {{ $cliente->cidade->estado }}
