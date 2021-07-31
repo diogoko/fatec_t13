@@ -20,6 +20,9 @@ class ClientesController2 extends Controller
             $consulta->whereYear('nascimento', '<', '2000');
         }
 
+        // Filtragem por tabela relacionada
+        $consulta->where('pais.nome', 'estados unidos');
+
         $filtroNome = $request->nome;
         if ($filtroNome) {
             $consulta->where(function ($query) use ($filtroNome) {

@@ -21,6 +21,13 @@ class ClientesController3 extends Controller
             $consulta->where('nome', 'like', "%$filtroNome%");
         }
 
+        /*
+        // Filtragem por tabela relacionada
+        $consulta->whereHas('cidade.pais', function ($query) use ($request) {
+            $query->where('nome', $request->paisSelecionado);
+        });
+        */
+
         $consulta->with('cidade', 'cidade.pais');
         $clientes = $consulta->get();
 
