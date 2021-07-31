@@ -9,8 +9,6 @@ class Cidade extends Model
 {
     use HasFactory;
 
-    public $timestamps = false;
-
     public function clientes() {
         return $this->hasMany(Cliente::class);
     }

@@ -11,8 +11,6 @@ class Cliente extends Model
 {
     use HasFactory;
 
-    public $timestamps = false;
-
     public $casts = [
         'nascimento' => 'date',
     ];

@@ -11,8 +11,6 @@ class Pais extends Model
 
     public $table = 'paises';
 
-    public $timestamps = false;
-
     public function cidades() {
         return $this->hasMany(Cidade::class);
     }
