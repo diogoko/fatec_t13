@@ -58,9 +58,7 @@ class ClientesController3 extends Controller
         return redirect()->route('ClientesListar');
     }
 
-    public function editar($id) {
-        $cliente = Cliente::find($id);
-
+    public function editar(Cliente $cliente) {
         return view('clientes.formulario3', [
             'cliente' => $cliente,
             'editando' => true,
@@ -68,14 +66,13 @@ class ClientesController3 extends Controller
         ]);
     }
 
-    public function alterar(Request $request, $id) {
+    public function alterar(Request $request, Cliente $cliente) {
         $request->validate([
             'nome' => 'required|max:200',
             'nascimento' => 'required|date',
             'cidade_id' => 'required|int',
         ]);
 
-        $cliente = Cliente::find($id);
         $cliente->nome = $request->nome;
         $cliente->nascimento = $request->nascimento;
         $cliente->cidade_id = $request->cidade_id;
