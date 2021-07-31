@@ -29,7 +29,9 @@ class ClientesController3 extends Controller
         */
 
         $consulta->with('cidade', 'cidade.pais');
-        $clientes = $consulta->get();
+
+        //$clientes = $consulta->get();
+        $clientes = $consulta->paginate(5)->withQueryString();
 
         return view('clientes.lista3', [
             'clientes' => $clientes,

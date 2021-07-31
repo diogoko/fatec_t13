@@ -56,6 +56,27 @@
             @endforeach
         </tbody>
     </table>
+
+    <div>
+        {{ $clientes->links() }}
+    </div>
+
+    <div>
+        <p>Mostrando {{ $clientes->count() }} itens na página {{ $clientes->currentPage() }} de {{ $clientes->lastPage() }}</p>
+        <p>
+            <a href="{{ $clientes->previousPageUrl() }}">Anterior</a>
+        </p>
+        <p>
+            <a href="{{ $clientes->nextPageUrl() }}">Próxima</a>
+        </p>
+        @for ($pagina = 1; $pagina <= $clientes->lastPage(); $pagina++)
+            <p>
+                <a href="{{ $clientes->url($pagina) }}">
+                    Página {{ $pagina }}
+                </a>
+            </p>
+        @endfor
+    </div>
 @endsection
 
 
