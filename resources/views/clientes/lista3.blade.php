@@ -27,6 +27,7 @@
                 <th>Nome</th>
                 <th>Nascimento</th>
                 <th>Cidade</th>
+                <th>Idade</th>
             </tr>
         </thead>
         <tbody>
@@ -47,6 +48,9 @@
                                 - {{ $cliente->cidade->pais->nome }}
                             @endif
                         @endif
+                    </td>
+                    <td>
+                        {{ $cliente->idadeFormatada }} ({{ $cliente->idadeAnos }} anos)
                     </td>
                 </tr>
             @endforeach
