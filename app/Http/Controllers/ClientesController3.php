@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cidade;
 use App\Models\Cliente;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class ClientesController3 extends Controller
 {
@@ -23,6 +21,7 @@ class ClientesController3 extends Controller
             $consulta->where('nome', 'like', "%$filtroNome%");
         }
 
+        $consulta->with('cidade', 'cidade.pais');
         $clientes = $consulta->get();
 
         return view('clientes.lista3', [
@@ -36,7 +35,7 @@ class ClientesController3 extends Controller
         return view('clientes.formulario3', [
             'cliente' => new Cliente(),
             'editando' => false,
-            'cidades' => DB::table('cidades')->orderBy('nome')->get(),
+            'cidades' => Cidade::orderBy('nome')->get(),
         ]);
     }
 
