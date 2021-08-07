@@ -19,12 +19,32 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
           <li class="nav-item">
-          <a class="nav-link" href="{{ route('ClientesListar') }}">Clientes</a>
+              <a class="nav-link" href="{{ route('ClientesListar') }}">Clientes</a>
           </li>
           <li class="nav-item">
-          <a class="nav-link" href="{{ route('CidadesListar') }}">Cidades</a>
+              <a class="nav-link" href="{{ route('CidadesListar') }}">Cidades</a>
           </li>
+          @guest
+          <li class="nav-item">
+              <a class="nav-link" href="{{ route('LoginFormulario') }}">Entrar</a>
+          </li>
+          @endguest
+          @auth
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+            {{auth()->user()->name}}
+            </a>
+        </li>
+        @endauth
         </ul>
+
+        @auth
+        <form class="d-flex" method="post" action="{{route('LoginLogout')}}">
+            @csrf
+          <button class="btn btn-link nav-link" type="submit">Sair</button>
+        </form>
+        @endauth
+
       </div>
     </div>
   </nav>

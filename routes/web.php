@@ -8,6 +8,7 @@ use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\ClientesController2;
 use App\Http\Controllers\ClientesController3;
 use App\Http\Controllers\CidadesController;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,3 +55,7 @@ Route::view('/cidades/novo', 'cidades.formulario');
 Route::post('/cidades/novo', [CidadesController::class, 'inserir'])->name('CidadesResultado');
 Route::get('/cidades/{cidade}', [CidadesController::class, 'editar'])->name('CidadesEditar');
 Route::post('/cidades/{cidade}', [CidadesController::class, 'alterar'])->name('CidadesAlterar');
+
+Route::get('/login', [LoginController::class, 'formulario'])->name('LoginFormulario');
+Route::post('/login', [LoginController::class, 'verificar'])->name('LoginVerificar');
+Route::post('/logout', [LoginController::class, 'logout'])->name('LoginLogout');
