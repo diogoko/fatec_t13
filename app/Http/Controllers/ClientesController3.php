@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 class ClientesController3 extends Controller
 {
     public function listar(Request $request) {
+        //session()->forget('olá da página de clientes');
+        //session()->put('mensagem', 'olá da página de clientes');
+
         $consulta = Cliente::orderBy('nome');
 
         $anterior2000 = $request->boolean('anterior2000');
@@ -62,6 +65,8 @@ class ClientesController3 extends Controller
         $cliente->save();
 
         logger('ID do novo cliente: ' . $cliente->id);
+
+        session()->flash('mensagem', 'Dados inseridos com sucesso');
 
         return redirect()->route('ClientesListar');
     }

@@ -1,6 +1,10 @@
 @extends('layout')
 
 @section('conteudo')
+    @if (session()->has('mensagem'))
+    <div class="alert alert-success">{{session()->get('mensagem') }}</div>
+    @endif
+
     <p>
         <a href="{{  route('ClientesNovo') }}" class="btn btn-primary">Criar</a>
     </p>
