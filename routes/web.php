@@ -45,7 +45,7 @@ $rota = Route::get('/calculadora/soma/{num1}/{num2}', [CalculadoraController::cl
 $rota->name('CalculadoraSoma');
 
 Route::get('/clientes', [ClientesController3::class, 'listar'])->name('ClientesListar');
-Route::get('/clientes/novo', [ClientesController3::class, 'novo'])->name('ClientesNovo');
+Route::get('/clientes/novo', [ClientesController3::class, 'novo'])->name('ClientesNovo')->middleware('auth');
 Route::post('/clientes/novo', [ClientesController3::class, 'inserir'])->name('ClientesResultado');
 Route::get('/clientes/{cliente}', [ClientesController3::class, 'editar'])->name('ClientesEditar');
 Route::post('/clientes/{cliente}', [ClientesController3::class, 'alterar'])->name('ClientesAlterar');
@@ -56,6 +56,6 @@ Route::post('/cidades/novo', [CidadesController::class, 'inserir'])->name('Cidad
 Route::get('/cidades/{cidade}', [CidadesController::class, 'editar'])->name('CidadesEditar');
 Route::post('/cidades/{cidade}', [CidadesController::class, 'alterar'])->name('CidadesAlterar');
 
-Route::get('/login', [LoginController::class, 'formulario'])->name('LoginFormulario');
+Route::get('/login', [LoginController::class, 'formulario'])->name('login');
 Route::post('/login', [LoginController::class, 'verificar'])->name('LoginVerificar');
 Route::post('/logout', [LoginController::class, 'logout'])->name('LoginLogout');

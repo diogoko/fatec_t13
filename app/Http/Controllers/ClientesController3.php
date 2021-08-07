@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 class ClientesController3 extends Controller
 {
     public function listar(Request $request) {
+        // exemplo pegar dados usuario
+        $usuario = auth()->user();
+
         //session()->forget('olá da página de clientes');
         //session()->put('mensagem', 'olá da página de clientes');
 
