@@ -26,7 +26,7 @@
           </li>
           @guest
           <li class="nav-item">
-              <a class="nav-link" href="{{ route('login') }}">Entrar</a>
+              <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
           </li>
           @endguest
           @auth
@@ -41,7 +41,7 @@
         @auth
         <form class="d-flex" method="post" action="{{route('LoginLogout')}}">
             @csrf
-          <button class="btn btn-link nav-link" type="submit">Sair</button>
+          <button class="btn btn-link nav-link" type="submit">{{ __('Logout') }}</button>
         </form>
         @endauth
 

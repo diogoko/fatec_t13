@@ -3,13 +3,13 @@
 @section('conteudo')
     @auth
     <p>
-        <a href="{{  route('CidadesNovo') }}" class="btn btn-primary">Criar</a>
+        <a href="{{  route('CidadesNovo') }}" class="btn btn-primary">{{ __('cidades.criar') }}</a>
     </p>
     @endauth
 
     <form action="{{ route('CidadesListar') }}" method="get">
         <div>
-            <label>Nome</label>
+            <label>{{ __('cidades.nome') }}</label>
             <input type="text" name="nome" value="{{ $nome }}">
         </div>
 
