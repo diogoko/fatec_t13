@@ -40,7 +40,7 @@ class LoginController extends Controller
 
             session()->flash('mensagem', 'Usuário logado com sucesso');
 
-            return redirect()->route('ClientesListar');
+            return redirect()->intended(route('ClientesListar'));
         } else {
             return back()->withErrors(['email' => 'Usuário ou senha incorretos']);
         }
