@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\CidadeCriada;
+use App\Models\Cidade;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class CidadesController extends Controller
 {
@@ -37,10 +40,15 @@ class CidadesController extends Controller
         $nome = $request->nome;
         $estado = $request->estado;
 
-        DB::table('cidades')->insertGetId([
+        $cidade = Cidade::create([
             'nome' => $nome,
             'estado' => $estado,
         ]);
+
+        $destinatario = auth()->user();
+        $mensagem = new CidadeCriada($cidade);
+        Mail::to($destinatario)
+            ->send($mensagem);
 
         return redirect()->route('CidadesListar');
     }

@@ -9,6 +9,11 @@ class Cidade extends Model
 {
     use HasFactory;
 
+    public $fillable = [
+        'nome',
+        'estado',
+    ];
+
     public function clientes() {
         return $this->hasMany(Cliente::class);
     }
