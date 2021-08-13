@@ -5,9 +5,11 @@
     <div class="alert alert-success">{{session()->get('mensagem') }}</div>
     @endif
 
+    @auth
     <p>
         <a href="{{  route('ClientesNovo') }}" class="btn btn-primary">Criar</a>
     </p>
+    @endauth
 
     <form action="{{ route('ClientesListar') }}" method="get">
         <div>

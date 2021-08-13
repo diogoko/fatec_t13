@@ -46,13 +46,13 @@ $rota->name('CalculadoraSoma');
 
 Route::get('/clientes', [ClientesController3::class, 'listar'])->name('ClientesListar');
 Route::get('/clientes/novo', [ClientesController3::class, 'novo'])->name('ClientesNovo')->middleware('auth');
-Route::post('/clientes/novo', [ClientesController3::class, 'inserir'])->name('ClientesResultado');
+Route::post('/clientes/novo', [ClientesController3::class, 'inserir'])->name('ClientesResultado')->middleware('auth');
 Route::get('/clientes/{cliente}', [ClientesController3::class, 'editar'])->name('ClientesEditar');
 Route::post('/clientes/{cliente}', [ClientesController3::class, 'alterar'])->name('ClientesAlterar');
 
 Route::get('/cidades', [CidadesController::class, 'listar'])->name('CidadesListar');
-Route::view('/cidades/novo', 'cidades.formulario');
-Route::post('/cidades/novo', [CidadesController::class, 'inserir'])->name('CidadesResultado');
+Route::view('/cidades/novo', 'cidades.formulario')->name('CidadesNovo')->middleware('auth');
+Route::post('/cidades/novo', [CidadesController::class, 'inserir'])->name('CidadesResultado')->middleware('auth');
 Route::get('/cidades/{cidade}', [CidadesController::class, 'editar'])->name('CidadesEditar');
 Route::post('/cidades/{cidade}', [CidadesController::class, 'alterar'])->name('CidadesAlterar');
 

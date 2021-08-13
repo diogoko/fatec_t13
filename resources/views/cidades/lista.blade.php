@@ -1,6 +1,12 @@
 @extends('layout')
 
 @section('conteudo')
+    @auth
+    <p>
+        <a href="{{  route('CidadesNovo') }}" class="btn btn-primary">Criar</a>
+    </p>
+    @endauth
+
     <form action="{{ route('CidadesListar') }}" method="get">
         <div>
             <label>Nome</label>
