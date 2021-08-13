@@ -28,10 +28,13 @@ class CidadesController extends Controller
         ]);
     }
 
-    private function validar($request) {
+    private function validar(Request $request) {
         $request->validate([
             'nome' => 'required|max:200',
             'estado' => 'required|size:2',
+        ], [
+            'required' => 'Preencha o(a) :attribute por gentileza',
+            'estado.required' => 'Você não sabe o estado em que a cidade fica??'
         ]);
     }
 
