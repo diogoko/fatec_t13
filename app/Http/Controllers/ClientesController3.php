@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cidade;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class ClientesController3 extends Controller
 {
@@ -95,5 +96,20 @@ class ClientesController3 extends Controller
         $cliente->save();
 
         return redirect()->route('ClientesListar');
+    }
+
+    public function buscarCep(Request $request) {
+        $response = Http::get("https://viacep.com.br/ws/{$request->cep}/json");
+        if ($response->status() == 200) {
+            $dados = $response->json();
+            if (isset($dados['erro'])) {
+                return response()->json(['erro' => 'CEP não encontrado']);
+            } else {
+                return $dados;
+            }
+        } else {
+            return response()->json(['erro' => 'CEP inválido']);
+        }
+        return ['cep' => $request->cep];
     }
 }

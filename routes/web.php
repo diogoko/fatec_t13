@@ -47,6 +47,7 @@ $rota->name('CalculadoraSoma');
 Route::get('/clientes', [ClientesController3::class, 'listar'])->name('ClientesListar');
 Route::get('/clientes/novo', [ClientesController3::class, 'novo'])->name('ClientesNovo')->middleware('auth');
 Route::post('/clientes/novo', [ClientesController3::class, 'inserir'])->name('ClientesResultado')->middleware('auth');
+Route::get('/clientes/cep', [ClientesController3::class, 'buscarCep'])->name('ClientesBuscarCep');
 Route::get('/clientes/{cliente}', [ClientesController3::class, 'editar'])->name('ClientesEditar');
 Route::post('/clientes/{cliente}', [ClientesController3::class, 'alterar'])->name('ClientesAlterar');
 

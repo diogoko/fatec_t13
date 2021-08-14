@@ -48,7 +48,7 @@
             </select>
         </div>
         <div>
-            <input type="text" placeholder="CEP" onblur="buscarCep()" id="cep">
+            <input type="text" placeholder="CEP" onblur="buscarCep2()" id="cep">
         </div>
         <div>
             <input type="text" placeholder="Logradouro" id="logradouro">
@@ -83,6 +83,27 @@
                 }
             } else {
                 alert('CEP inválido');
+            }
+        }
+
+        async function buscarCep2() {
+            const cep = document.getElementById('cep').value;
+            if (!cep) {
+                return;
+            }
+
+            const response = await fetch(`{{route('ClientesBuscarCep')}}?cep=${cep}`);
+            if (response.status === 200) {
+                const dados = await response.json();
+                if (dados.erro) {
+                    alert(dados.erro);
+                } else {
+                    document.getElementById('logradouro').value = dados.logradouro;
+                    document.getElementById('bairro').value = dados.bairro;
+                    document.getElementById('municipio').value = dados.localidade;
+                }
+            } else {
+                alert('Erro inesperado');
             }
         }
     </script>
