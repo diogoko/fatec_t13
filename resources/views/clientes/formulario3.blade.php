@@ -48,9 +48,44 @@
             </select>
         </div>
         <div>
+            <input type="text" placeholder="CEP" onblur="buscarCep()" id="cep">
+        </div>
+        <div>
+            <input type="text" placeholder="Logradouro" id="logradouro">
+        </div>
+        <div>
+            <input type="text" placeholder="Bairro" id="bairro">
+        </div>
+        <div>
+            <input type="text" placeholder="Municipio" id="municipio">
+        </div>
+        <div>
             <input type="submit" value="Salvar">
         </div>
     </form>
+
+    <script>
+        async function buscarCep() {
+            const cep = document.getElementById('cep').value;
+            if (!cep) {
+                return;
+            }
+
+            const response = await fetch(`https://viacep.com.br/ws/${cep}/json`);
+            if (response.status === 200) {
+                const dados = await response.json();
+                if (dados.erro) {
+                    alert('CEP não encontrado');
+                } else {
+                    document.getElementById('logradouro').value = dados.logradouro;
+                    document.getElementById('bairro').value = dados.bairro;
+                    document.getElementById('municipio').value = dados.localidade;
+                }
+            } else {
+                alert('CEP inválido');
+            }
+        }
+    </script>
 @endsection
 
 @section('titulo')
