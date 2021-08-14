@@ -48,6 +48,8 @@ Route::get('/clientes', [ClientesController3::class, 'listar'])->name('ClientesL
 Route::get('/clientes/novo', [ClientesController3::class, 'novo'])->name('ClientesNovo')->middleware('auth');
 Route::post('/clientes/novo', [ClientesController3::class, 'inserir'])->name('ClientesResultado')->middleware('auth');
 Route::get('/clientes/cep', [ClientesController3::class, 'buscarCep'])->name('ClientesBuscarCep');
+Route::get('/clientes/{cliente}/foto', [ClientesController3::class, 'carregarFoto'])->name('ClientesCarregarFoto');
+Route::post('/clientes/{cliente}/foto', [ClientesController3::class, 'salvarFoto'])->name('ClientesSalvarFoto');
 Route::get('/clientes/{cliente}', [ClientesController3::class, 'editar'])->name('ClientesEditar');
 Route::post('/clientes/{cliente}', [ClientesController3::class, 'alterar'])->name('ClientesAlterar');
 

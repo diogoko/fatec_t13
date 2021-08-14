@@ -6,6 +6,7 @@ use App\Models\Cidade;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 
 class ClientesController3 extends Controller
 {
@@ -111,5 +112,25 @@ class ClientesController3 extends Controller
             return response()->json(['erro' => 'CEP inválido']);
         }
         return ['cep' => $request->cep];
+    }
+
+    public function salvarFoto(Request $request, Cliente $cliente) {
+        $request->validate([
+            'foto' => 'required|file|image',
+        ]);
+
+        $arquivoFoto = $request->foto->store('fotosClientes');
+        $cliente->foto = $arquivoFoto;
+        $cliente->save();
+
+        return redirect()->route('ClientesEditar', ['cliente' => $cliente->id]);
+    }
+
+    public function carregarFoto(Cliente $cliente) {
+        if ($cliente->foto) {
+            return Storage::download($cliente->foto);
+        } else {
+            abort(404);
+        }
     }
 }

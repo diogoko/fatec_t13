@@ -64,6 +64,26 @@
         </div>
     </form>
 
+    @if ($editando)
+    <hr>
+
+    @if ($cliente->foto)
+        <img src="{{ route('ClientesCarregarFoto', ['cliente' => $cliente->id]) }}">
+    @else
+        <p>Sem foto</p>
+    @endif
+
+    <form action="{{ route('ClientesSalvarFoto', ['cliente' => $cliente->id]) }}" method="post" enctype="multipart/form-data">
+        @csrf
+
+        <input type="file" name="foto"/>
+        @error('foto')
+        <p>{{ $message }}</p>
+        @enderror
+        <input type="submit" value="Salvar foto"/>
+    </form>
+    @endif
+
     <script>
         async function buscarCep() {
             const cep = document.getElementById('cep').value;
