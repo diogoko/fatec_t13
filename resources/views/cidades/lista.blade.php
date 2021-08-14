@@ -16,6 +16,8 @@
         <div><input type="submit" value="Pesquisar"></div>
     </form>
 
+    <p>{{ trans_choice('cidades.quantidade', $cidades->count()) }}</p>
+
     <table>
         <thead>
             <tr>
@@ -33,7 +35,7 @@
                             {{ $cidade->nome }}
                         </a>
                     </td>
-                    <td>{{ $cidade->estado }}</td>
+                    <td>{{ __('cidades.local', ['estado' => $cidade->estado]) }}</td>
                 </tr>
             @endforeach
         </tbody>
